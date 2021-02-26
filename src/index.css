@@ -1,13 +1,174 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400&display=swap");
+
+* {
+    box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+button,
+input {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    border-radius: 0;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    overflow: hidden;
+    text-transform: none;
+    color: inherit;
 }
+
+button:focus,
+input:focus {
+    outline: 0;
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+    font-size: 2rem;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+div.App {
+    width: 400px;
+    height: 650px;
+    background-color: #000000;
+    margin: 100px auto;
+    border-radius: 50px;
+}
+
+div.Buttons {
+    padding: 15px;
+    width: 100%;
+    display: grid;
+    grid-gap: 15px;
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+}
+
+div.Buttons .button {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+}
+
+div.Buttons .function {
+    background-color: #aaa;
+    color: black;
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+div.Buttons .function:nth-of-type(2) {
+    font-size: 2.3rem;
+    font-weight: 300;
+}
+
+div.Buttons .operator {
+    background-color: orange;
+    color: white;
+    font-size: 2.8rem;
+}
+
+div.Buttons .zero {
+    width: 175px;
+    border-radius: 50px;
+    grid-column: 1 / span 2;
+    text-align: left;
+    padding-left: 30px;
+}
+
+div.Display {
+    padding: 0 30px;
+    color: white;
+    font-size: 5rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    width: 100%;
+    height: 160px;
+    font-weight: 200;
+}
+
+/* div.App button {
+    height: 110px;
+    border: 0 1px 0 1px;
+    border-color: #222222;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: 1px solid #222222;
+    border-bottom: 1px solid #222222;
+    cursor: pointer;
+}
+
+div.App button:first-child {
+    height: 110px;
+    border: 0 1px 0 1px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 20px;
+    font-size: 3rem;
+    background-color: #333333;
+}
+
+input.answer {
+    flex-basis: 100%;
+    height: 110px;
+    border: 0 1px 0 1px;
+    border-color: #222222;
+    padding: 20px;
+    text-align: right;
+    border-left: 1px solid #222222;
+    border-bottom: 1px solid #222222;
+    cursor: pointer;
+    background-color: #333333;
+    font-size: 3rem;
+}
+
+button.ac {
+    flex-basis: 75%;
+    background-color: #555555;
+}
+
+button.number,
+button.equal {
+    background-color: #666666;
+    flex-basis: 25%;
+}
+
+button.number-active {
+    background-color: white;
+    color: #666666;
+    border: none;
+}
+
+button.number:nth-child(16) {
+    flex-basis: 50%;
+}
+
+button.operator,
+button.equal {
+    flex-grow: 1;
+    background-color: #ff9e0b;
+    font-size: 3rem;
+}
+
+button.operator-active {
+    background-color: white;
+    color: #ff9e0b;
+}
+
+h2 {
+    font-size: 1rem;
+    color: #222222;
+} */
