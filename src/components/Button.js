@@ -1,10 +1,15 @@
 import React from "react";
 
-export default function Button({ value, type, handleClick }) {
+export default function Button({ value, type, operator = null, buttonClick }) {
     return (
         <button
-            className={`button ${value === "0" ? "zero" : ""} ${type}`}
-            onClick={() => handleClick(value)}
+            name={value}
+            className={`button ${value === 0 ? "zero" : ""} ${type}`}
+            data-type={type}
+            data-operator={operator}
+            onClick={e => {
+                buttonClick(e);
+            }}
         >
             {value}
         </button>

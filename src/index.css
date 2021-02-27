@@ -120,7 +120,6 @@ div.Buttons .zero {
 div.Display {
     padding: 0 30px;
     color: white;
-    font-size: 5rem;
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;

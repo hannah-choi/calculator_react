@@ -1,64 +1,56 @@
 import React from "react";
 import Button from "./Button";
 
-export default function Buttons({ handleClick }) {
-    const numArray = [
-        { value: 7, type: "number" },
-        { value: 8, type: "number" },
-        { value: 9, type: "number" },
-        { value: 4, type: "number" },
-        { value: 5, type: "number" },
-        { value: 6, type: "number" },
-        { value: 1, type: "number" },
-        { value: 2, type: "number" },
-        { value: 3, type: "number" },
-        { value: 0, type: "number" },
-        { value: ".", type: "number" },
-    ];
+export default function Buttons({ buttonClick }) {
+    const numArray = [7, 8, 9, 4, 5, 6, 1, 2, 3, 0, "."];
+    const funcArray = ["AC", "±", "%"];
+    const operatorArray = ["÷", "×", "–", "+", "="];
 
-    const funcArray = [
-        { value: "AC", type: "function" },
-        { value: "±", type: "function" },
-        { value: "%", type: "function" },
-    ];
-
-    const operatorArray = [
-        { value: "÷", type: "operator" },
-        { value: "×", type: "operator" },
-        { value: "–", type: "operator" },
-        { value: "+", type: "operator" },
-        { value: "=", type: "operator" },
-    ];
+    const getOperator = operator => {
+        switch (operator) {
+            case "÷":
+                return "/";
+            case "–":
+                return "-";
+            case "×":
+                return "*";
+            case "+":
+                return "+";
+            default:
+                break;
+        }
+    };
 
     return (
         <div className="Buttons">
             <div className="functionsWrapper">
                 {funcArray.map((num, i) => (
                     <Button
-                        value={num.value}
-                        type={num.type}
+                        value={num}
                         key={i}
-                        handleClick={handleClick}
+                        type="function"
+                        buttonClick={buttonClick}
                     />
                 ))}
             </div>
             <div className="operatorsWrapper">
                 {operatorArray.map((num, i) => (
                     <Button
-                        value={num.value}
-                        type={num.type}
+                        type="operator"
+                        value={num}
+                        operator={getOperator(num)}
                         key={i}
-                        handleClick={handleClick}
+                        buttonClick={buttonClick}
                     />
                 ))}
             </div>
             <div className="numbersWrapper">
                 {numArray.map((num, i) => (
                     <Button
-                        value={num.value}
-                        type={num.type}
+                        type="number"
+                        value={num}
                         key={i}
-                        handleClick={handleClick}
+                        buttonClick={buttonClick}
                     />
                 ))}
             </div>
