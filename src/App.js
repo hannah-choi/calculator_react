@@ -4,11 +4,11 @@ import Display from "./components/Display";
 import Buttons from "./components/Buttons";
 
 function App() {
-    const [data, setData] = useState(""); //display
+    const [data, setData] = useState("0"); //display
     const [prevClicked, setPrevClicked] = useState(null); //previously clicked number
-    const [memory, setMemory] = useState(null); //final calculation
+    const [memory, setMemory] = useState("0"); //final calculation
     const [operator, setOperator] = useState(false); //operator
-    const [disableDot, setDisableDot] = useState(false); //Disable dot when necessary
+    const [complete, setComplete] = useState(false); //Disable dot when necessary
 
     const buttonClick = e => {
         if (data.length > 11) {
@@ -17,38 +17,67 @@ function App() {
         switch (e.target.dataset.type) {
             case "number":
                 if (operator) {
+                    setPrevClicked(e.target.name);
                     setMemory(memory + e.target.name);
-                    setData(eval(memory + e.target.name));
+                    setData(e.target.name);
                     setOperator(false);
                 } else {
+                    if (prevClicked === "0" && e.target.name === "0") {
+                        return;
+                    }
+                    if (prevClicked === "." && e.target.name === ".") {
+                        return;
+                    }
+                    if (data.includes(".") && e.target.name === ".") {
+                        return;
+                    }
                     setPrevClicked(e.target.name);
-                    setData(data + e.target.name);
-                    setMemory(memory + e.target.name);
+                    setData(
+                        data === "0" && e.target.name !== "."
+                            ? e.target.name
+                            : data + e.target.name
+                    );
+                    setMemory(
+                        memory === "0" ? e.target.name : memory + e.target.name
+                    );
                     setOperator(false);
                 }
                 break;
             case "operator":
-                if (!prevClicked || operator) {
+                if (!prevClicked || operator || !data) {
                     return;
                 }
+                if (e.target.name === "=" || memory) {
+                    try {
+                        console.log("data:", data);
+                        console.log("memory:", memory);
+                        setData(eval(memory));
+                        setMemory(data);
+                    } catch (error) {
+                        console.log(error);
+                    }
+                }
                 setMemory(data + e.target.dataset.operator);
-                console.log(memory);
+                setPrevClicked(e.target.dataset.operator);
                 setOperator(true);
                 break;
             case "function":
                 switch (e.target.name) {
                     case "AC":
-                        setData("");
-                        setMemory(null);
+                        setData("0");
+                        setMemory("0");
                         break;
                     case "±":
-                        setMemory(null);
-                        parseFloat(data) < 0
-                            ? setData(Math.abs(parseFloat(data)))
-                            : setData(Math.abs(parseFloat(data)) * -1);
+                        if (parseFloat(data) < 0) {
+                            setData(Math.abs(parseFloat(data)));
+                            setMemory(Math.abs(parseFloat(data)));
+                        } else {
+                            setData(Math.abs(parseFloat(data)) * -1);
+                            setMemory(Math.abs(parseFloat(data)) * -1);
+                        }
                         break;
                     case "%":
-                        setMemory(null);
+                        setMemory(parseFloat(data) / 100);
                         setData(parseFloat(data) / 100);
                         break;
                     default:
@@ -59,75 +88,6 @@ function App() {
                 break;
         }
     };
-
-    // const handleClick = value => {
-    //     const initialize = () => {
-    //         setMemory(null);
-    //         setOperator(null);
-    //     };
-
-    //     const operatorInit = symbol => {
-    //         setMemory(parseFloat(display));
-    //         setDisplay("0");
-    //         setOperator(`${symbol}`);
-    //     };
-
-    //     const operatorCalc = symbol => {
-    //         setDisplay(
-    //             eval(`${parseFloat(memory)}${symbol}${parseFloat(display)}`)
-    //         );
-    //     };
-
-    //     switch (value) {
-    //         case "AC":
-    //             setDisplay("0");
-    //             initialize();
-    //             break;
-    //         case "±":
-    //             parseFloat(display) < 0
-    //                 ? setDisplay(Math.abs(parseFloat(display)))
-    //                 : setDisplay(Math.abs(parseFloat(display)) * -1);
-    //             break;
-    //         case "%":
-    //             setDisplay(parseFloat(display) / 100);
-    //             initialize();
-    //             break;
-
-    //         case "÷":
-    //             operatorInit("/");
-    //             break;
-    //         case "–":
-    //             operatorInit("-");
-    //             break;
-    //         case "×":
-    //             operatorInit("*");
-    //             break;
-    //         case "+":
-    //             operatorInit("+");
-    //             break;
-
-    //         case "=":
-    //             if (!operator) {
-    //                 return;
-    //             }
-    //             switch (operator) {
-    //                 case "+":
-    //                     operatorCalc("+");
-    //                     break;
-    //                 case "-":
-    //                     operatorCalc("-");
-    //                     break;
-    //                 default:
-    //                     break;
-    //             }
-    //             initialize();
-    //             break;
-
-    //         default:
-    //             setDisplay((parseFloat(display) + value).toString());
-    //             break;
-    //     }
-    // };
 
     return (
         <div className="App">

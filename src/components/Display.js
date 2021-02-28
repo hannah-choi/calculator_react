@@ -8,7 +8,7 @@ export default function Display({ data }) {
                 fontSize: `${data.length <= 6 ? 5 : data.length * 0.4}rem`,
             }}
         >
-            {!data ? 0 : data}
+            {data}
         </div>
     );
 }
