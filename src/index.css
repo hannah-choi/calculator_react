@@ -85,6 +85,12 @@ div.Buttons .button {
     background-color: #333;
     color: white;
     cursor: pointer;
+    transition: filter 0.2s ease-in;
+}
+
+div.Buttons .button:active,
+div.Buttons .button:focus {
+    filter: brightness(120%);
 }
 
 div.Buttons .function {

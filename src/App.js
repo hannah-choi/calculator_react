@@ -8,27 +8,32 @@ function App() {
     const [prevClicked, setPrevClicked] = useState(null); //previously clicked number
     const [memory, setMemory] = useState("0"); //final calculation
     const [operator, setOperator] = useState(false); //operator
-    const [complete, setComplete] = useState(false); //Disable dot when necessary
 
     const buttonClick = e => {
-        if (data.length > 11) {
-            return;
-        }
         switch (e.target.dataset.type) {
+            //when one of the number buttons is clicked
             case "number":
+                if (data.length > 9) {
+                    return;
+                }
                 if (operator) {
+                    //prevent double operator
                     setPrevClicked(e.target.name);
                     setMemory(memory + e.target.name);
-                    setData(e.target.name);
+                    setData(e.target.name.toString());
                     setOperator(false);
                 } else {
                     if (prevClicked === "0" && e.target.name === "0") {
-                        return;
+                        return; //prevent multiple zeros
                     }
                     if (prevClicked === "." && e.target.name === ".") {
-                        return;
+                        return; //prevent multiple dots
                     }
-                    if (data.includes(".") && e.target.name === ".") {
+                    if (
+                        data.toString().indexOf(".") > -1 &&
+                        e.target.name === "."
+                    ) {
+                        //prevent multiple dots
                         return;
                     }
                     setPrevClicked(e.target.name);
@@ -43,24 +48,16 @@ function App() {
                     setOperator(false);
                 }
                 break;
+            //when one of the operator buttons is clicked
             case "operator":
                 if (!prevClicked || operator || !data) {
                     return;
-                }
-                if (e.target.name === "=" || memory) {
-                    try {
-                        console.log("data:", data);
-                        console.log("memory:", memory);
-                        setData(eval(memory));
-                        setMemory(data);
-                    } catch (error) {
-                        console.log(error);
-                    }
                 }
                 setMemory(data + e.target.dataset.operator);
                 setPrevClicked(e.target.dataset.operator);
                 setOperator(true);
                 break;
+            //when one of the function buttons is clicked
             case "function":
                 switch (e.target.name) {
                     case "AC":
@@ -70,18 +67,42 @@ function App() {
                     case "±":
                         if (parseFloat(data) < 0) {
                             setData(Math.abs(parseFloat(data)));
-                            setMemory(Math.abs(parseFloat(data)));
+                            setMemory(data);
                         } else {
                             setData(Math.abs(parseFloat(data)) * -1);
-                            setMemory(Math.abs(parseFloat(data)) * -1);
+                            setMemory(data);
                         }
                         break;
                     case "%":
-                        setMemory(parseFloat(data) / 100);
-                        setData(parseFloat(data) / 100);
+                        setData((parseFloat(data) / 100).toString());
+                        setMemory(data);
                         break;
                     default:
                         break;
+                }
+                break;
+            //when the equal button is clicked
+            case "equal":
+                if (memory && !operator) {
+                    const result = eval(memory);
+                    const isFloat = result => {
+                        return result % 1 !== 0;
+                    };
+                    try {
+                        // console.log("data:", data);
+                        // console.log("memory:", memory);
+                        if (result.toString().length > 3 && isFloat(result)) {
+                            setData(result.toFixed(4).toString());
+                            setMemory(data);
+                            setOperator(false);
+                        } else {
+                            setData(result.toString());
+                            setMemory(data);
+                            setOperator(false);
+                        }
+                    } catch (error) {
+                        console.log(error);
+                    }
                 }
                 break;
             default:
