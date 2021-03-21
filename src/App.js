@@ -13,9 +13,6 @@ function App() {
         switch (e.target.dataset.type) {
             //when one of the number buttons is clicked
             case "number":
-                if (data.length > 9) {
-                    return;
-                }
                 if (operator) {
                     //prevent double operator
                     setPrevClicked(e.target.name);
@@ -23,6 +20,9 @@ function App() {
                     setData(e.target.name.toString());
                     setOperator(false);
                 } else {
+                    if (data.length > 8) {
+                        return;
+                    }
                     if (prevClicked === "0" && e.target.name === "0") {
                         return; //prevent multiple zeros
                     }
@@ -33,9 +33,8 @@ function App() {
                         data.toString().indexOf(".") > -1 &&
                         e.target.name === "."
                     ) {
-                        //prevent multiple dots
                         return;
-                    }
+                    } //prevent multiple dots
                     setPrevClicked(e.target.name);
                     setData(
                         data === "0" && e.target.name !== "."
@@ -65,6 +64,9 @@ function App() {
                         setMemory("0");
                         break;
                     case "±":
+                        if (data === 0 || data === "0") {
+                            return;
+                        }
                         if (parseFloat(data) < 0) {
                             setData(Math.abs(parseFloat(data)));
                             setMemory(data);
@@ -74,6 +76,9 @@ function App() {
                         }
                         break;
                     case "%":
+                        if (data === 0 || data === "0") {
+                            return;
+                        }
                         setData((parseFloat(data) / 100).toString());
                         setMemory(data);
                         break;
@@ -89,8 +94,6 @@ function App() {
                         return result % 1 !== 0;
                     };
                     try {
-                        // console.log("data:", data);
-                        // console.log("memory:", memory);
                         if (result.toString().length > 3 && isFloat(result)) {
                             setData(result.toFixed(4).toString());
                             setMemory(data);

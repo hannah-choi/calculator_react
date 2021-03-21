@@ -5,7 +5,7 @@ export default function Display({ data }) {
         <div
             className="Display"
             style={{
-                fontSize: `${data.length <= 6 ? 5 : data.length * 0.4}rem`,
+                fontSize: `${data.length <= 6 ? 5 : data.length * 0.42}rem`,
             }}
         >
             {data}
