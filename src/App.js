@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./index.css";
 import Display from "./components/Display";
 import Buttons from "./components/Buttons";
+import Footer from "./components/Footer";
 
 function App() {
     const [data, setData] = useState("0"); //display
@@ -117,6 +118,7 @@ function App() {
         <div className="App">
             <Display data={data} />
             <Buttons buttonClick={buttonClick} />
+            <Footer />
         </div>
     );
 }

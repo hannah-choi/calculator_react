@@ -134,77 +134,32 @@ div.Display {
     font-weight: 200;
 }
 
-/* div.App button {
-    height: 110px;
-    border: 0 1px 0 1px;
-    border-color: #222222;
+footer {
+    width: 90%;
+    color: #222222;
+    font-size: 0.8rem;
+    display: flex;
+    margin: 0 auto;
+    justify-content: space-between;
+}
+
+footer .secondary {
+    width: 150px;
+}
+
+footer a {
+    width: 115px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    border-left: 1px solid #222222;
-    border-bottom: 1px solid #222222;
-    cursor: pointer;
+    justify-content: space-between;
+    text-decoration: none;
+    color: #333;
 }
 
-div.App button:first-child {
-    height: 110px;
-    border: 0 1px 0 1px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding-right: 20px;
-    font-size: 3rem;
-    background-color: #333333;
-}
-
-input.answer {
-    flex-basis: 100%;
-    height: 110px;
-    border: 0 1px 0 1px;
-    border-color: #222222;
-    padding: 20px;
-    text-align: right;
-    border-left: 1px solid #222222;
-    border-bottom: 1px solid #222222;
-    cursor: pointer;
-    background-color: #333333;
-    font-size: 3rem;
-}
-
-button.ac {
-    flex-basis: 75%;
-    background-color: #555555;
-}
-
-button.number,
-button.equal {
-    background-color: #666666;
-    flex-basis: 25%;
-}
-
-button.number-active {
-    background-color: white;
-    color: #666666;
-    border: none;
-}
-
-button.number:nth-child(16) {
-    flex-basis: 50%;
-}
-
-button.operator,
-button.equal {
-    flex-grow: 1;
-    background-color: #ff9e0b;
-    font-size: 3rem;
-}
-
-button.operator-active {
-    background-color: white;
+footer a:hover {
     color: #ff9e0b;
 }
 
-h2 {
-    font-size: 1rem;
-    color: #222222;
-} */
+footer .github {
+    fill: #ff9e0b;
+}
